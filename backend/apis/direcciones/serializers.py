@@ -13,7 +13,7 @@ class DireccionSerializer(serializers.ModelSerializer):
             'fecha_modificacion',
             'direccion_usuario',
             'direccion_empresa',
-            'direccion_estado_uso',
+            'direccion_sts_direccion',
             'direccion_street_one',
             'direccion_street_two',
             'catalogo_direccion',
