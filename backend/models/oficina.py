@@ -1,11 +1,12 @@
 from django.db import models
-from backend.models.empresa import Empresa, Direccion
+from backend.models.direcciones import Direccion
+
 
 class Oficina(models.Model):
     oficina_codigo = models.CharField(max_length=10, unique=True)
     oficina_nombre = models.CharField(max_length=255)
     oficina_telefono = models.CharField(max_length=20)
-    oficina_empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE)
+    oficina_empresa = models.ForeignKey('backend.Empresa', on_delete=models.CASCADE)
     oficina_direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
 
     def __str__(self):

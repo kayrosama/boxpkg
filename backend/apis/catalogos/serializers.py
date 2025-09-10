@@ -6,6 +6,7 @@ class CatalogoDireccionSerializer(serializers.ModelSerializer):
         model = CatalogoDireccion
         fields = [
             'country',
+            'state_id',
             'state_name',
             'city_base',
             'city',
