@@ -37,3 +37,17 @@ STS_TRACKING = [
     (12, 'Enviado por Cargo'),
     (13, 'Perdido'),
 ]
+
+TIPO_CONTACTO = [
+        (1, 'Cliente'),
+        (2, 'Encargado'),
+        (3, 'Proveedor'),
+    ]
+
+CUI_TIPO = [
+    (0, 'NoIdentificado'),
+    (1, 'DPI'),
+    (2, 'Pasaporte'),
+    (3, 'US - ID Card'),
+    (4, 'US - Seguro Social'),
+]
