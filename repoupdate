@@ -1,0 +1,29 @@
+#!/bin/bash
+
+echo -e "GitHub -->> Verificando cambios en el repositorio...\c"
+
+# Verifica si hay cambios para agregar
+if git diff --quiet && git diff --cached --quiet; then
+    echo -e "\nNo hay cambios para actualizar. Saliendo..."
+    exit 0
+fi
+
+echo -e "\nAgregando cambios..."
+git add .
+
+echo -e "Realizando commit..."
+if git commit -am "Local Branch - Information UpDate"; then
+    echo -e "Commit exitoso."
+else
+    echo -e "No se pudo hacer commit. Verifica los cambios."
+    exit 1
+fi
+
+echo -e "Haciendo push a origin/main..."
+if git push -u origin main; then
+    echo -e "Push exitoso. Repositorio actualizado."
+else
+    echo -e "Error al hacer push. Verifica tu conexión o permisos."
+    exit 1
+fi
+
