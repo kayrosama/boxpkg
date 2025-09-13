@@ -4,16 +4,16 @@ from backend.constants import TIPO_CONTACTO, CUI_TIPO
 import uuid
 
 def generate_numeric_uuid():
-    return str(uuid.uuid4(
+    return str(uuid.uuid4().int)[:15]
 
 class Contacto(models.Model):
     contacto_codigo = models.CharField(max_length=15, default=generate_numeric_uuid, editable=False)
     contacto_tipo = models.IntegerField(choices=TIPO_CONTACTO, default=1)
     contacto_cui_tipo = models.IntegerField(choices=CUI_TIPO, default=1)
     contacto_cui_registro = models.CharField(max_length=20, null=True, blank=True)
-	contacto_nombres = models.CharField(max_length=100)
-	contacto_apellido_uno = models.CharField(max_length=30)
-	contacto_apellido_dos = models.CharField(max_length=30)
+    contacto_nombres = models.CharField(max_length=100)
+    contacto_apellido_uno = models.CharField(max_length=30)
+    contacto_apellido_dos = models.CharField(max_length=30)
     contacto_telefono = models.CharField(max_length=20, blank=True, default='')
     contacto_correo = models.EmailField(blank=True, default='')
     contacto_direccion = models.ForeignKey('backend.Direccion', on_delete=models.SET_NULL, null=True, blank=True)
