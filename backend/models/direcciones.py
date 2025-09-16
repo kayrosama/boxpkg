@@ -4,10 +4,7 @@ from django.utils import timezone
 from core_auth.models import User
 from backend.constants import STS_REGISTRO, STS_TIPO, STS_DIRECCION
 from backend.models.catalogos import CatalogoDireccion
-import uuid
-
-def generate_numeric_uuid():
-    return str(uuid.uuid4().int)[:15]
+from backend.models.utils import generate_numeric_uuid
 
 
 class Direccion(models.Model):
@@ -28,5 +25,5 @@ class Direccion(models.Model):
     direccion_street_two = models.CharField(max_length=30, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.direccion_codigo} - {self.get_direccion_estado_uso_display()}"
-    
+        return f"{self.direccion_codigo} - {self.get_direccion_sts_tipo_display()}"
+

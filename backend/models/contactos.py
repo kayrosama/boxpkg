@@ -1,10 +1,9 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 from backend.models.direcciones import Direccion
 from backend.constants import TIPO_CONTACTO, CUI_TIPO
-import uuid
+from backend.models.utils import generate_numeric_uuid
 
-def generate_numeric_uuid():
-    return str(uuid.uuid4().int)[:15]
 
 class Contacto(models.Model):
     contacto_codigo = models.CharField(max_length=15, default=generate_numeric_uuid, editable=False)
@@ -24,4 +23,4 @@ class Contacto(models.Model):
     def clean(self):
         if len(self.contacto_codigo) < 8 or len(self.contacto_codigo) > 15:
             raise ValidationError("El código de empresa debe tener entre 8 y 15 caracteres.")
-            
+           

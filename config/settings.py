@@ -172,13 +172,13 @@ LOGGING = {
         'systemout_file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': 'logs/SystemOut.log',
+            'filename': os.path.join(LOG_DIR, 'SystemOut.log'),
             'formatter': 'verbose',
         },
         'honeypot_file': {
             'level': 'WARNING',
             'class': 'logging.FileHandler',
-            'filename': 'logs/HoneyPot.log',
+            'filename': os.path.join(LOG_DIR, 'HoneyPot.log'),
             'formatter': 'verbose',
         },
     },
