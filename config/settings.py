@@ -67,7 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'honeypot.middleware.HoneypotMiddleware',
+    'honeypot.middleware.HoneypotMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
