@@ -1,4 +1,5 @@
 from django.db import models
+from backend.models.empresa import Empresa
 from backend.models.direcciones import Direccion
 
 
@@ -7,7 +8,7 @@ class Oficina(models.Model):
     oficina_nombre = models.CharField(max_length=255)
     oficina_telefono = models.CharField(max_length=20)
     oficina_empresa = models.ForeignKey('backend.Empresa', on_delete=models.CASCADE)
-    oficina_direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
+    oficina_direccion = models.ForeignKey('backend.Direccion', on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.oficina_nombre} ({self.oficina_codigo})"

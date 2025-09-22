@@ -9,8 +9,9 @@ STS_TIPO = [
     (0, 'Inactivo'),
     (1, 'Cliente'),
     (2, 'Usuario'),
-    (3, 'Proveedor'),
-    (4, 'Inmueble'),
+    (3, 'Encargado'),
+    (4, 'Proveedor'),
+    (5, 'Inmueble'),
 ]
 
 # Estado de uso de dirección
@@ -18,6 +19,23 @@ STS_DIRECCION = [
     (0, 'Inactivo'),
     (1, 'Principal'),
     (2, 'Secundaria'),
+]
+
+DIR_COUNTRY = [
+    (1,'Estados Unidos'),
+    (2,'Guatemala'),
+]
+
+DIR_STATE = [
+    (1,'CA'),
+    (2,'GT'),
+]
+
+DIR_CITY = [
+    (1,'Los Angeles'),
+    (2,'Oakland'),
+    (3,'San Francisco'),
+    (4,'Guatemala'),
 ]
 
 # Tipo de tracking
@@ -38,11 +56,10 @@ STS_TRACKING = [
     (13, 'Perdido'),
 ]
 
-TIPO_CONTACTO = [
-        (1, 'Cliente'),
-        (2, 'Encargado'),
-        (3, 'Proveedor'),
-    ]
+STS_PAGO = [
+    (0, 'No Pagado'),
+    (1, 'Pagado'),
+]
 
 CUI_TIPO = [
     (0, 'NoIdentificado'),

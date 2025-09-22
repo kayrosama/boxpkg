@@ -1,13 +1,13 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from backend.models.direcciones import Direccion
-from backend.constants import TIPO_CONTACTO, CUI_TIPO
+from backend.constants import STS_TIPO, CUI_TIPO
 from backend.models.utils import generate_numeric_uuid
 
 
 class Contacto(models.Model):
     contacto_codigo = models.CharField(max_length=15, default=generate_numeric_uuid, editable=False)
-    contacto_tipo = models.IntegerField(choices=TIPO_CONTACTO, default=1)
+    contacto_tipo = models.IntegerField(choices=STS_TIPO, default=1)
     contacto_cui_tipo = models.IntegerField(choices=CUI_TIPO, default=1)
     contacto_cui_registro = models.CharField(max_length=20, null=True, blank=True)
     contacto_nombres = models.CharField(max_length=100)
