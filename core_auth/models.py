@@ -15,13 +15,14 @@ class UserManager(BaseUserManager):
     def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('role', 'admin')
+        extra_fields.setdefault('role', 'owner')
 
         return self.create_user(email, password, **extra_fields)
 
 
 class User(AbstractBaseUser, PermissionsMixin):
     ROLE_CHOICES = (
+        ('owner', 'Propietario del sistema'),
         ('admin', 'Administrador del sistema'),
         ('sysoper', 'Administrador de aplicación'),
         ('opera', 'Operador del sistema'),
