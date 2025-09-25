@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from backend.constants import DIR_COUNTRY, DIR_STATE, DIR_CITY, STS_PAGO
+from backend.constants import STS_PAGO
 
 
 class Guia(models.Model):
@@ -10,12 +10,12 @@ class Guia(models.Model):
     src_apellido_dos = models.CharField(max_length=30, blank=True, null=True)
     src_telefono_uno = models.CharField(max_length=20, blank=True, null=True)
     src_telefono_dos = models.CharField(max_length=20, blank=True, null=True)
-
+    
     # Dirección del remitente
-    src_pais = models.CharField(choices=DIR_COUNTRY, default=1)
-    src_estado = models.CharField(choices=DIR_STATE, default=1)
-    src_ciudad = models.CharField(choices=DIR_CITY, default=1)
-    src_zipcode = models.CharField(max_length=20, default=90004)
+    src_pais = models.CharField(max_length=50, blank=True, null=True)
+    src_estado = models.CharField(max_length=50, blank=True, null=True)
+    src_ciudad = models.CharField(max_length=50, blank=True, null=True)
+    src_zipcode = models.CharField(max_length=20, blank=True, null=True)
     src_direccion_uno = models.CharField(max_length=150, blank=True, null=True)
     src_direccion_dos = models.CharField(max_length=150, blank=True, null=True)
 
@@ -27,16 +27,16 @@ class Guia(models.Model):
     dst_telefono_dos = models.CharField(max_length=20, blank=True, null=True)
 
     # Dirección del destinatario
-    dst_pais = models.CharField(choices=DIR_COUNTRY, default=1)
-    dst_estado = models.CharField(choices=DIR_STATE, default=1)
-    dst_ciudad = models.CharField(choices=DIR_CITY, default=1)
-    dst_zipcode = models.CharField(max_length=20, default=90004)
+    dst_pais = models.CharField(max_length=50, blank=True, null=True)
+    dst_estado = models.CharField(max_length=50, blank=True, null=True)
+    dst_ciudad = models.CharField(max_length=50, blank=True, null=True)
+    dst_zipcode = models.CharField(max_length=20, blank=True, null=True)
     dst_direccion_uno = models.CharField(max_length=150, blank=True, null=True)
     dst_direccion_dos = models.CharField(max_length=150, blank=True, null=True)
 
     # Datos del paquete
     guia_num = models.CharField(max_length=10, unique=True)
-    peso = models.DecimalField(max_digits=6, decimal_places=2)
+    peso = models.DecimalField(max_digits=5, decimal_places=2)
     descripcion_contenido = models.TextField(blank=True, null=True)
     fecha = models.DateTimeField(auto_now_add=True)
     monto = models.DecimalField(max_digits=10, decimal_places=2)
