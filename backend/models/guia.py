@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from backend.constants import STS_PAGO
+from backend.models.addresses import State, Country, ZipCode
 
 
 class Guia(models.Model):
@@ -50,3 +51,38 @@ class Guia(models.Model):
 
     def __str__(self):
         return f"Guía {self.guia_num}"
+
+    def suggest_address(self, estado, ciudad, zipcode):
+        return {
+            'estado': list(State.objects.filter(abbr__icontains=estado).values_list('abbr', flat=True)),
+            'ciudad': list(Country.objects.filter(name__icontains=ciudad).values_list('name', flat=True)),
+            'zipcode': list(ZipCode.objects.filter(code__icontains=zipcode).values_list('code', flat=True)),
+        }
+
+    def clean(self):
+        errors = {}
+
+        # Validar dirección del remitente
+        if not State.objects.filter(abbr=self.src_estado).exists():
+            errors['src_estado'] = f"Estado remitente '{self.src_estado}' no válido. Sugerencias: {self.suggest_address(self.src_estado, '', '')['estado']}"
+        if not Country.objects.filter(name__iexact=self.src_ciudad, state__abbr=self.src_estado).exists():
+            errors['src_ciudad'] = f"Ciudad remitente '{self.src_ciudad}' no válida. Sugerencias: {self.suggest_address('', self.src_ciudad, '')['ciudad']}"
+        if not ZipCode.objects.filter(code=self.src_zipcode, state__abbr=self.src_estado, city__iexact=self.src_ciudad).exists():
+            errors['src_zipcode'] = f"Zipcode remitente '{self.src_zipcode}' no válido. Sugerencias: {self.suggest_address('', '', self.src_zipcode)['zipcode']}"
+
+        # Validar dirección del destinatario
+        if not State.objects.filter(abbr=self.dst_estado).exists():
+            errors['dst_estado'] = f"Estado destinatario '{self.dst_estado}' no válido. Sugerencias: {self.suggest_address(self.dst_estado, '', '')['estado']}"
+        if not Country.objects.filter(name__iexact=self.dst_ciudad, state__abbr=self.dst_estado).exists():
+            errors['dst_ciudad'] = f"Ciudad destinatario '{self.dst_ciudad}' no válida. Sugerencias: {self.suggest_address('', self.dst_ciudad, '')['ciudad']}"
+        if not ZipCode.objects.filter(code=self.dst_zipcode, state__abbr=self.dst_estado, city__iexact=self.dst_ciudad).exists():
+            errors['dst_zipcode'] = f"Zipcode destinatario '{self.dst_zipcode}' no válido. Sugerencias: {self.suggest_address('', '', self.dst_zipcode)['zipcode']}"
+
+        if errors:
+            raise ValidationError(errors)
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
+        
+        
