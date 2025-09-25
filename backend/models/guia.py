@@ -7,8 +7,7 @@ from backend.models.addresses import State, Country, ZipCode
 class Guia(models.Model):
     # Datos del remitente
     src_nombres = models.CharField(max_length=50, blank=True, null=True)
-    src_apellido_uno = models.CharField(max_length=30, blank=True, null=True)
-    src_apellido_dos = models.CharField(max_length=30, blank=True, null=True)
+    src_apellidos = models.CharField(max_length=50, blank=True, null=True)
     src_telefono_uno = models.CharField(max_length=20, blank=True, null=True)
     src_telefono_dos = models.CharField(max_length=20, blank=True, null=True)
     
@@ -17,13 +16,12 @@ class Guia(models.Model):
     src_estado = models.CharField(max_length=50, blank=True, null=True)
     src_ciudad = models.CharField(max_length=50, blank=True, null=True)
     src_zipcode = models.CharField(max_length=20, blank=True, null=True)
-    src_direccion_uno = models.CharField(max_length=150, blank=True, null=True)
-    src_direccion_dos = models.CharField(max_length=150, blank=True, null=True)
+    src_street_uno = models.CharField(max_length=150, blank=True, null=True)
+    src_street_dos = models.CharField(max_length=150, blank=True, null=True)
 
     # Datos del destinatario
     dst_nombres = models.CharField(max_length=50, blank=True, null=True)
-    dst_apellido_uno = models.CharField(max_length=30, blank=True, null=True)
-    dst_apellido_dos = models.CharField(max_length=30, blank=True, null=True)
+    dst_apellidos = models.CharField(max_length=30, blank=True, null=True)
     dst_telefono_uno = models.CharField(max_length=20, blank=True, null=True)
     dst_telefono_dos = models.CharField(max_length=20, blank=True, null=True)
 
@@ -32,14 +30,15 @@ class Guia(models.Model):
     dst_estado = models.CharField(max_length=50, blank=True, null=True)
     dst_ciudad = models.CharField(max_length=50, blank=True, null=True)
     dst_zipcode = models.CharField(max_length=20, blank=True, null=True)
-    dst_direccion_uno = models.CharField(max_length=150, blank=True, null=True)
-    dst_direccion_dos = models.CharField(max_length=150, blank=True, null=True)
+    dst_street_uno = models.CharField(max_length=150, blank=True, null=True)
+    dst_street_dos = models.CharField(max_length=150, blank=True, null=True)
 
     # Datos del paquete
+    fecha_crea = models.DateTimeField(auto_now_add=True)
+    fecha_guia = models.DateTimeField(default=timezone.now)
     guia_num = models.CharField(max_length=10, unique=True)
     peso = models.DecimalField(max_digits=5, decimal_places=2)
-    descripcion_contenido = models.TextField(blank=True, null=True)
-    fecha = models.DateTimeField(auto_now_add=True)
+    lista_contenido = models.TextField(blank=True, null=True)
     monto = models.DecimalField(max_digits=10, decimal_places=2)
     valor_estimado = models.DecimalField(max_digits=10, decimal_places=2)
 
